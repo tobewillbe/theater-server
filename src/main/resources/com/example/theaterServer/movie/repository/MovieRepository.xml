@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.theaterServer.movie.repository.MovieRepository">
+
+    <insert id="create">
+        INSERT INTO movie
+        (MV_Id, MV_Nm, MV_NmEn, ShowT, ProdY, OpenD, MV_Type, MV_Nation, MV_Genre, Directors, Companies, Actors, S_Type, MV_Thumbnail)
+        VALUES
+            (#{movieCd}, #{movieName}, #{movieNameEn}, #{movieLength}, #{moviePy}, #{movieOd}, #{movieType}, #{movieNation},
+             #{genre}, #{directors}, #{companies}, #{actors}, #{sType}, #{movieThumbnail})
+
+    </insert>
+
+    <select id="listAll" resultType="com.example.theaterServer.movie.dto.MovieListDTO">
+        SELECT MV_Id, MV_Nm, MV_Thumbnail
+        FROM movie
+        ORDER BY MV_Id
+    </select>
+
+    <select id="read" resultType="com.example.theaterServer.movie.dto.MovieDTO">
+        SELECT MV_Id, MV_Nm, MV_NmEn, ShowT, ProdY, OpenD, MV_Type, MV_Nation, MV_Genre, Directors, Companies, Actors, S_Type, MV_Thumbnail
+        FROM movie
+        WHERE MV_Id=#{id}
+    </select>
+
+    <update id="update">
+        UPDATE movie
+        SET MV_Nm=#{movieName},MV_NmEn=#{movieNameEn}, ShowT=#{movieLength}, ProdY=#{moviePy}, OpenD=#{movieOd}, MV_Type=#{movieType}, MV_Nation=#{movieNation},
+            MV_Genre=#{genre}, Directors=#{directors}, Companies=#{companies}, Actors=#{actors}, S_Type=#{sType}, MV_Thumbnail=#{movieThumbnail}
+        WHERE MV_Id=#{movieCd}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM movie
+        where MV_Id = #{mvId}
+    </delete>
+
+
+
+</mapper>
